@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINKER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const linksParam = urlParams.get('l');
+
+            if (linksParam) {
+                const links = linksParam.split(',');
+                const listContainer = document.createElement('ul');
+                listContainer.className = 'list-none p-0';
+
+                links.forEach(link => {
+                    const listItem = document.createElement('li');
+                    const anchor = document.createElement('a');
+                    anchor.href = `https://${link}`;
+                    anchor.rel = "noreferrer noopener";
+                    anchor.textContent = link;
+                    anchor.className = 'text-white text-lg no-underline block my-2';
+
+                    listItem.appendChild(anchor);
+                    listContainer.appendChild(listItem);
+                });
+
+                const mainContainer = document.getElementById('main-container');
+                mainContainer.appendChild(listContainer);
+            }
+        });
+    </script>
+</head>
+<body class="bg-[#1f243d] text-white font-sans m-0 p-0 flex flex-col h-screen w-screen overflow-hidden">
+    <main id="main-container" class="flex-grow flex items-center justify-center overflow-y-auto">
+    </main>
+    <footer class="mt-auto h-[5px] w-full flex">
+        <div class="flex-1 bg-[#8f31ea]"></div>
+        <div class="flex-1 bg-[#4b40f2]"></div>
+        <div class="flex-1 bg-[#477fdc]"></div>
+        <div class="flex-1 bg-[#4bd2f2]"></div>
+        <div class="flex-1 bg-[#05ebad]"></div>
+    </footer>
+</body>
+</html>
