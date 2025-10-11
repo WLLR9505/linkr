@@ -10,6 +10,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             const body = document.body;
             const mainContainer = document.getElementById('main-container');
+            const theme_btn = document.getElementById("theme-btn");
+            const selected_theme = document.getElementById("selected_theme");
+            let themeState = localStorage.getItem('theme') || "auto";
+
             function day_mode() {
                 body.classList.remove('dark');
                 mainContainer.classList.add('bg-white', 'text-[#1f243d]');
@@ -26,83 +30,123 @@
                 currentHour >= 12 && currentHour < 18 ? day_mode() : night_mode();
             }
 
-            apply_theme_based_on_time();
+            function apply_theme(theme) {
+                if (theme === "night") {
+                    night_mode();
+                    selected_theme.textContent = "night";
+                    selected_theme.style.color = "#8f31ea";
+                } else if (theme === "day") {
+                    day_mode();
+                    selected_theme.textContent = "day";
+                    selected_theme.style.color = "#05ebad";
+                } else {
+                    apply_theme_based_on_time();
+                    selected_theme.textContent = "auto";
+                    selected_theme.style.color = "#477fdc";
+                }
+            }
+
+            apply_theme(themeState);
+
             const prefixMap = {
-                ig: "https://instagram.com/",
-                fb: "https://facebook.com/",
-                tw: "https://twitter.com/",
-                li: "https://linkedin.com/in/",
-                ln: "https://linkedin.com/company/",
-                tt: "https://tiktok.com/@",
-                sc: "https://soundcloud.com/",
-                dc: "https://discord.com/",
-                pn: "https://pinterest.com/",
-                rd: "https://reddit.com/",
-                yt: "https://youtube.com/@",
+                ig: "instagram.com/",
+                stm: "steamcommunity.com/id/",
+                fb: "facebook.com/",
+                tw: "twitter.com/",
+                li: "linkedin.com/in/",
+                ln: "linkedin.com/company/",
+                tt: "tiktok.com/@",
+                sc: "soundcloud.com/",
+                dc: "discord.com/",
+                pn: "pinterest.com/",
+                rd: "reddit.com/",
+                yt: "youtube.com/@",
+                ttv: "twitch.tv/",
+                kck: "kick.com/",
 
-                gh: "https://github.com/",
-                gl: "https://gitlab.com/",
-                wp: "https://wordpress.com/",
-                tg: "https://t.me/",
-                sp: "https://spotify.com/",
-                db: "https://dropbox.com/",
-                gd: "https://drive.google.com/",
-                aws: "https://aws.amazon.com/",
+                gh: "github.com/",
+                gl: "gitlab.com/",
+                wp: "wordpress.com/",
+                tg: "t.me/",
+                sp: "spotify.com/",
+                db: "dropbox.com/",
+                gd: "drive.google.com/",
+                aws: "aws.amazon.com/",
 
-                wb: "https://web.archive.org/web/",
-                wkp: "https://wikipedia.org/wiki/",
+                wb: "web.archive.org/web/",
+                wkp: "wikipedia.org/wiki/",
             };
 
 
-            const urlParams = new URLSearchParams(window.location.search);
-            const linksParam = urlParams.get('l');
+            function list_links() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const linksParam = urlParams.get('l');
 
-            if (linksParam) {
-                const links = linksParam.split(',');
-                const listContainer = document.createElement('ul');
-                listContainer.className = 'list-none p-0';
+                if (linksParam) {
+                    const links = linksParam.split(',');
+                    const listContainer = document.createElement('ul');
+                    listContainer.className = 'list-none p-0';
 
-                links.forEach(link => {
-                    const [prefix, ...rest] = link.split('/');
-                    const restJoined = rest.join('/');
-                    const base = prefixMap[prefix] || 'https://';
-                    const fullLink = base + restJoined;
+                    links.forEach(link => {
+                        const [prefix, ...rest] = link.split('/');
+                        const restJoined = rest.join('/');
+                        const base = prefixMap[prefix] || 'https://';
+                        const fullLink = "https://" + base + restJoined;
 
-                    const listItem = document.createElement('li');
-                    const anchor = document.createElement('a');
-                    anchor.href = fullLink;
-                    anchor.rel = "noreferrer noopener";
-                    anchor.textContent = fullLink.replace(/^https?:\/\//, ''); // exibe sem o "https://"
-                    anchor.className = 'text-lg no-underline block my-2';
+                        const listItem = document.createElement('li');
+                        const anchor = document.createElement('a');
+                        anchor.href = fullLink;
+                        anchor.rel = "noreferrer noopener";
+                        anchor.textContent = fullLink.replace(/^https?:\/\//, '');
+                        anchor.className = 'text-lg no-underline block my-2';
 
-                    listItem.appendChild(anchor);
-                    listContainer.appendChild(listItem);
-                });
+                        listItem.appendChild(anchor);
+                        listContainer.appendChild(listItem);
+                    });
 
-                const mainContainer = document.getElementById('main-container');
-                mainContainer.appendChild(listContainer);
+                    const mainContainer = document.getElementById('main-container');
+                    mainContainer.appendChild(listContainer);
+                }
             }
-
-            const theme_btn = document.getElementById("theme-btn");
-            const selected_theme = document.getElementById("selected_theme");
-            let themeState = "auto"; // Default state
+            list_links();
 
             theme_btn.addEventListener('click', () => {
                 if (themeState === "auto") {
                     themeState = "night";
-                    selected_theme.textContent = themeState;
-                    selected_theme.style.color = "#8f31ea";
-                    night_mode();
                 } else if (themeState === "night") {
                     themeState = "day";
-                    selected_theme.textContent = themeState;
-                    selected_theme.style.color = "#05ebad";
-                    day_mode();
                 } else {
                     themeState = "auto";
-                    selected_theme.textContent = themeState;
-                    selected_theme.style.color = "#477fdc";
-                    apply_theme_based_on_time();
+                }
+
+                localStorage.setItem('theme', themeState);
+
+                apply_theme(themeState);
+            });
+
+            const help_btn = document.getElementById("help-btn");
+
+            help_btn.addEventListener('click', () => {
+                if(!mainContainer.classList.contains('help')) {
+                    const mainContainer = document.getElementById('main-container');
+                    mainContainer.classList.add('help');
+                    mainContainer.innerHTML = '';
+
+                    const listContainer = document.createElement('ul');
+                    listContainer.className = 'list-none p-0';
+
+                    Object.entries(prefixMap).forEach(([prefix, url]) => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${prefix}: "${url}"`;
+                        listItem.className = 'text-lg my-2';
+                        listContainer.appendChild(listItem);
+                    });
+
+                    mainContainer.appendChild(listContainer);
+                } else {
+                    mainContainer.classList.remove('help');
+                    mainContainer.innerHTML = '';
+                    list_links();
                 }
             });
         });
@@ -119,6 +163,7 @@
     <main id="main-container" class="row-span-1 col-span-1 flex items-center justify-center overflow-y-auto">
     </main>
     <footer class="text-white text-center row-span-1 col-span-2 h-full w-full flex items-center justify-center">
+        <button id="help-btn" class="absolute left-2">?</button>
         <strong>
             <> by <a class="bg-gradient-to-r from-[#8f31ea] via-[#4b40f2] via-[#477fdc] via-[#4bd2f2] to-[#05ebad] bg-clip-text text-transparent" href="https://github.com/WLLR9505" class="text-inherit">WLLR9505</a>
         </strong>
