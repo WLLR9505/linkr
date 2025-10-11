@@ -85,7 +85,7 @@
                 if (linksParam) {
                     const links = linksParam.split(',');
                     const listContainer = document.createElement('ul');
-                    listContainer.className = 'list-none p-0';
+                    listContainer.className = 'list-none p-0 h-full content-center';
 
                     links.forEach(link => {
                         const [prefix, ...rest] = link.split('/');
@@ -133,7 +133,7 @@
                     mainContainer.innerHTML = '';
 
                     const listContainer = document.createElement('ul');
-                    listContainer.className = 'list-none p-0';
+                    listContainer.className = 'list-none p-0 h-full content-center';
 
                     Object.entries(prefixMap).forEach(([prefix, url]) => {
                         const listItem = document.createElement('li');
