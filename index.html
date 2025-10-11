@@ -3,10 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LINKER</title>
+    <title>LINKr</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const mainContainer = document.getElementById('main-container');
+            function day_mode() {
+                body.classList.remove('dark');
+                mainContainer.classList.add('bg-white', 'text-[#1f243d]');
+                mainContainer.classList.remove('bg-[#1f243d]', 'text-white');
+            }
+            function night_mode() {
+                body.classList.add('dark');
+                mainContainer.classList.add('bg-[#1f243d]', 'text-white');
+                mainContainer.classList.remove('bg-white', 'text-[#1f243d]');
+            }
+
+            function apply_theme_based_on_time() {
+                const currentHour = new Date().getHours();
+                currentHour >= 12 && currentHour < 18 ? day_mode() : night_mode();
+            }
+
+            apply_theme_based_on_time();
             const urlParams = new URLSearchParams(window.location.search);
             const linksParam = urlParams.get('l');
 
@@ -21,7 +40,7 @@
                     anchor.href = `https://${link}`;
                     anchor.rel = "noreferrer noopener";
                     anchor.textContent = link;
-                    anchor.className = 'text-white text-lg no-underline block my-2';
+                    anchor.className = 'text-lg no-underline block my-2';
 
                     listItem.appendChild(anchor);
                     listContainer.appendChild(listItem);
@@ -30,18 +49,47 @@
                 const mainContainer = document.getElementById('main-container');
                 mainContainer.appendChild(listContainer);
             }
+
+            const theme_btn = document.getElementById("theme-btn");
+            const selected_theme = document.getElementById("selected_theme");
+            let themeState = "auto"; // Default state
+
+            theme_btn.addEventListener('click', () => {
+                if (themeState === "auto") {
+                    themeState = "night";
+                    selected_theme.textContent = themeState;
+                    selected_theme.style.color = "#8f31ea";
+                    night_mode();
+                } else if (themeState === "night") {
+                    themeState = "day";
+                    selected_theme.textContent = themeState;
+                    selected_theme.style.color = "#05ebad";
+                    day_mode();
+                } else {
+                    themeState = "auto";
+                    selected_theme.textContent = themeState;
+                    selected_theme.style.color = "#477fdc";
+                    apply_theme_based_on_time();
+                }
+            });
         });
     </script>
 </head>
-<body class="bg-[#1f243d] text-white font-sans m-0 p-0 flex flex-col h-screen w-screen overflow-hidden">
-    <main id="main-container" class="flex-grow flex items-center justify-center overflow-y-auto">
+<body class="bg-[#16161d] text-white font-mono m-0 p-0 grid grid-rows-[1fr_35px] grid-cols-[10px_1fr] h-screen w-screen overflow-hidden dark">
+    <div class="side-palette row-span-1 col-span-1 h-full w-full flex flex-col">
+        <div class="flex-1 bg-[#8f31ea] flex items-center">L</div>
+        <div class="flex-1 bg-[#4b40f2] flex items-center">I</div>
+        <div class="flex-1 bg-[#477fdc] flex items-center">N</div>
+        <div class="flex-1 bg-[#4bd2f2] flex items-center">K</div>
+        <div class="flex-1 bg-[#05ebad] flex items-center">r</div>
+    </div>
+    <main id="main-container" class="row-span-1 col-span-1 flex items-center justify-center overflow-y-auto">
     </main>
-    <footer class="mt-auto h-[5px] w-full flex">
-        <div class="flex-1 bg-[#8f31ea]"></div>
-        <div class="flex-1 bg-[#4b40f2]"></div>
-        <div class="flex-1 bg-[#477fdc]"></div>
-        <div class="flex-1 bg-[#4bd2f2]"></div>
-        <div class="flex-1 bg-[#05ebad]"></div>
+    <footer class="text-white text-center row-span-1 col-span-2 h-full w-full flex items-center justify-center">
+        <strong>
+            <> by <a class="bg-gradient-to-r from-[#8f31ea] via-[#4b40f2] via-[#477fdc] via-[#4bd2f2] to-[#05ebad] bg-clip-text text-transparent" href="https://github.com/WLLR9505" class="text-inherit">WLLR9505</a>
+        </strong>
+        <button id="theme-btn" class="absolute right-0">theme(<span id="selected_theme" class="text-[#477fdc]">auto</span>)</button>
     </footer>
 </body>
 </html>
