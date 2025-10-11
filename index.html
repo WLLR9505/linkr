@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LINKr</title>
+    <meta name="description" content="Link page based on params">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +27,33 @@
             }
 
             apply_theme_based_on_time();
+            const prefixMap = {
+                ig: "https://instagram.com/",
+                fb: "https://facebook.com/",
+                tw: "https://twitter.com/",
+                li: "https://linkedin.com/in/",
+                ln: "https://linkedin.com/company/",
+                tt: "https://tiktok.com/@",
+                sc: "https://soundcloud.com/",
+                dc: "https://discord.com/",
+                pn: "https://pinterest.com/",
+                rd: "https://reddit.com/",
+                yt: "https://youtube.com/@",
+
+                gh: "https://github.com/",
+                gl: "https://gitlab.com/",
+                wp: "https://wordpress.com/",
+                tg: "https://t.me/",
+                sp: "https://spotify.com/",
+                db: "https://dropbox.com/",
+                gd: "https://drive.google.com/",
+                aws: "https://aws.amazon.com/",
+
+                wb: "https://web.archive.org/web/",
+                wkp: "https://wikipedia.org/wiki/",
+            };
+
+
             const urlParams = new URLSearchParams(window.location.search);
             const linksParam = urlParams.get('l');
 
@@ -35,11 +63,16 @@
                 listContainer.className = 'list-none p-0';
 
                 links.forEach(link => {
+                    const [prefix, ...rest] = link.split('/');
+                    const restJoined = rest.join('/');
+                    const base = prefixMap[prefix] || 'https://';
+                    const fullLink = base + restJoined;
+
                     const listItem = document.createElement('li');
                     const anchor = document.createElement('a');
-                    anchor.href = `https://${link}`;
+                    anchor.href = fullLink;
                     anchor.rel = "noreferrer noopener";
-                    anchor.textContent = link;
+                    anchor.textContent = fullLink.replace(/^https?:\/\//, ''); // exibe sem o "https://"
                     anchor.className = 'text-lg no-underline block my-2';
 
                     listItem.appendChild(anchor);
@@ -75,7 +108,7 @@
         });
     </script>
 </head>
-<body class="bg-[#16161d] text-white font-mono m-0 p-0 grid grid-rows-[1fr_35px] grid-cols-[10px_1fr] h-screen w-screen overflow-hidden dark">
+<body class="bg-[#16161d] text-white font-mono m-0 p-0 grid grid-rows-[1fr_35px] grid-cols-[10px_1fr] h-dvh w-screen overflow-hidden select-none dark">
     <div class="side-palette row-span-1 col-span-1 h-full w-full flex flex-col">
         <div class="flex-1 bg-[#8f31ea] flex items-center">L</div>
         <div class="flex-1 bg-[#4b40f2] flex items-center">I</div>
