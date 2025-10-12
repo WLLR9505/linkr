@@ -49,32 +49,31 @@
             apply_theme(themeState);
 
             const prefixMap = {
-                ig: "instagram.com/",
-                stm: "steamcommunity.com/id/",
-                fb: "facebook.com/",
-                tw: "twitter.com/",
-                li: "linkedin.com/in/",
-                ln: "linkedin.com/company/",
-                tt: "tiktok.com/@",
-                sc: "soundcloud.com/",
+                aws: "aws.amazon.com/",
+                db: "dropbox.com/",
                 dc: "discord.com/",
-                pn: "pinterest.com/",
-                rd: "reddit.com/",
-                yt: "youtube.com/@",
-                ttv: "twitch.tv/",
-                kck: "kick.com/",
-
+                fb: "facebook.com/",
+                gd: "drive.google.com/",
                 gh: "github.com/",
                 gl: "gitlab.com/",
-                wp: "wordpress.com/",
-                tg: "t.me/",
+                ig: "instagram.com/",
+                kck: "kick.com/",
+                li: "linkedin.com/in/",
+                ln: "linkedin.com/company/",
+                pn: "pinterest.com/",
+                rd: "reddit.com/",
+                sc: "soundcloud.com/",
                 sp: "spotify.com/",
-                db: "dropbox.com/",
-                gd: "drive.google.com/",
-                aws: "aws.amazon.com/",
-
+                stm: "steamcommunity.com/id/",
+                tg: "t.me/",
+                tt: "tiktok.com/@",
+                ttv: "twitch.tv/",
+                tw: "twitter.com/",
+                vsc: "vsco.co/",
                 wb: "web.archive.org/web/",
                 wkp: "wikipedia.org/wiki/",
+                wp: "wordpress.com/",
+                yt: "youtube.com/@",
             };
 
 
@@ -85,7 +84,7 @@
                 if (linksParam) {
                     const links = linksParam.split(',');
                     const listContainer = document.createElement('ul');
-                    listContainer.className = 'list-none p-0 h-full content-center';
+                    listContainer.className = 'list-none p-0 h-full content-center backdrop-blur-sm';
 
                     links.forEach(link => {
                         const [prefix, ...rest] = link.split('/');
@@ -133,7 +132,7 @@
                     mainContainer.innerHTML = '';
 
                     const listContainer = document.createElement('ul');
-                    listContainer.className = 'list-none p-0 h-full content-center';
+                    listContainer.className = 'list-none p-0 h-full content-center backdrop-blur-sm';
 
                     Object.entries(prefixMap).forEach(([prefix, url]) => {
                         const listItem = document.createElement('li');
@@ -160,7 +159,7 @@
         <div class="flex-1 bg-[#4bd2f2] flex items-center">K</div>
         <div class="flex-1 bg-[#05ebad] flex items-center">r</div>
     </div>
-    <main id="main-container" class="row-span-1 col-span-1 flex items-center justify-center overflow-y-auto">
+    <main id="main-container" class="bg-[url('./background.svg')] bg-cover bg-center row-span-1 col-span-1 flex items-center justify-center overflow-y-auto">
     </main>
     <footer class="text-white text-center row-span-1 col-span-2 h-full w-full flex items-center justify-center">
         <button id="help-btn" class="absolute left-2">?</button>
