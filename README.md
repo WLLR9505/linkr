@@ -9,14 +9,14 @@ A aplicação lê os parâmetros da query string (parte após `?`) e renderiza o
 Exemplo:
 
 ```text
-https://wllr9505.github.io/linkr/?l=gh/WLLR9505,ig/wllr9505,yt/canal
+https://wllr9505.github.io/linkr/?l=gh/WLLR9505,ig/wllr9505
 ```
 
 ## Parâmetros de URL
 
-| Parâmetro | Tipo | Obrigatório | Descrição | Exemplo |
-| --- | --- | --- | --- | --- |
-| `l` | string (lista separada por vírgula) | Não | Lista de links no formato `prefixo/caminho`. Cada item vira um link na página. | `?l=gh/WLLR9505,ig/wllr9505` |
+| Parâmetro | Tipo | Obrigatório | Tipo de destino | Descrição | Exemplo |
+| --- | --- | --- | --- | --- | --- |
+| `l` | string (lista separada por vírgula) | Não | Misto: principalmente páginas de perfil, mas também destinos gerais (ex.: convites, páginas de empresa, artigos, páginas arquivadas) | Lista de links no formato `prefixo/caminho`. Cada item vira um link na página. | `?l=gh/WLLR9505,ig/wllr9505` |
 
 ## Prefixos suportados em `l`
 
@@ -26,7 +26,7 @@ Use os prefixos abaixo antes da barra (`/`) para montar automaticamente o domín
 | --- | --- |
 | `aws` | `aws.amazon.com/` |
 | `db` | `dropbox.com/` |
-| `dc` | `discord.com/` |
+| `dc` | `discord.gg/` |
 | `fb` | `facebook.com/` |
 | `gd` | `drive.google.com/` |
 | `gh` | `github.com/` |
