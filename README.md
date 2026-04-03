@@ -22,32 +22,32 @@ https://wllr9505.github.io/linkr/?l=gh/WLLR9505,ig/wllr9505
 
 Use os prefixos abaixo antes da barra (`/`) para montar automaticamente o domínio:
 
-| Prefixo | Base gerada |
-| --- | --- |
-| `aws` | `aws.amazon.com/` |
-| `db` | `dropbox.com/` |
-| `dc` | `discord.gg/` |
-| `fb` | `facebook.com/` |
-| `gd` | `drive.google.com/` |
-| `gh` | `github.com/` |
-| `gl` | `gitlab.com/` |
-| `ig` | `instagram.com/` |
-| `kck` | `kick.com/` |
-| `li` | `linkedin.com/in/` |
-| `ln` | `linkedin.com/company/` |
-| `pn` | `pinterest.com/` |
-| `rd` | `reddit.com/` |
-| `sc` | `soundcloud.com/` |
-| `sp` | `spotify.com/` |
-| `stm` | `steamcommunity.com/id/` |
-| `tg` | `t.me/` |
-| `tt` | `tiktok.com/@` |
-| `ttv` | `twitch.tv/` |
-| `tw` | `twitter.com/` |
-| `vsc` | `vsco.co/` |
-| `wb` | `web.archive.org/web/` |
-| `wkp` | `wikipedia.org/wiki/` |
-| `wp` | `wordpress.com/` |
-| `yt` | `youtube.com/@` |
+| Prefixo | Base gerada | Tipo de página de destino |
+| --- | --- | --- |
+| `aws` | `aws.amazon.com/` | Página geral |
+| `db` | `dropbox.com/` | Arquivo/pasta |
+| `dc` | `discord.gg/` | Convite de servidor |
+| `fb` | `facebook.com/` | Página/perfil |
+| `gd` | `drive.google.com/` | Arquivo/pasta |
+| `gh` | `github.com/` | Perfil/repositório |
+| `gl` | `gitlab.com/` | Perfil/repositório |
+| `ig` | `instagram.com/` | Perfil |
+| `kck` | `kick.com/` | Perfil/canal |
+| `li` | `linkedin.com/in/` | Perfil |
+| `ln` | `linkedin.com/company/` | Página de empresa |
+| `pn` | `pinterest.com/` | Perfil/pasta |
+| `rd` | `reddit.com/` | Perfil/comunidade/post |
+| `sc` | `soundcloud.com/` | Perfil/faixa |
+| `sp` | `spotify.com/` | Perfil/faixa/playlist |
+| `stm` | `steamcommunity.com/id/` | Perfil |
+| `tg` | `t.me/` | Perfil/canal/grupo |
+| `tt` | `tiktok.com/@` | Perfil |
+| `ttv` | `twitch.tv/` | Canal |
+| `tw` | `twitter.com/` | Perfil/post |
+| `vsc` | `vsco.co/` | Perfil |
+| `wb` | `web.archive.org/web/` | Página arquivada |
+| `wkp` | `wikipedia.org/wiki/` | Artigo |
+| `wp` | `wordpress.com/` | Site/página |
+| `yt` | `youtube.com/@` | Canal |
 
 Se o prefixo não existir na lista, o valor é tratado como URL direta após `https://`.
